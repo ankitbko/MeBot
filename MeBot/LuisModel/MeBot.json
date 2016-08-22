@@ -1,0 +1,62 @@
+{
+  "luis_schema_version": "1.3.0",
+  "name": "MeBot",
+  "desc": "A bot about myself",
+  "culture": "en-us",
+  "intents": [
+    {
+      "name": "AboutMe"
+    },
+    {
+      "name": "None"
+    }
+  ],
+  "entities": [],
+  "composites": [],
+  "bing_entities": [],
+  "actions": [],
+  "model_features": [],
+  "regex_features": [],
+  "utterances": [
+    {
+      "text": "who is ankit",
+      "intent": "AboutMe",
+      "entities": []
+    },
+    {
+      "text": "who is author of this blog",
+      "intent": "AboutMe",
+      "entities": []
+    },
+    {
+      "text": "who is ankit sinha",
+      "intent": "AboutMe",
+      "entities": []
+    },
+    {
+      "text": "i want to order a pizza",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "i want to rent a car",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "lets play football",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "who wrote this blog",
+      "intent": "AboutMe",
+      "entities": []
+    },
+    {
+      "text": "who is the author here",
+      "intent": "AboutMe",
+      "entities": []
+    }
+  ]
+}
