@@ -17,6 +17,7 @@ namespace MeBot.Dialogs
         {
         }
 
+        [LuisIntent("None")]
         [LuisIntent("")]
         public async Task None(IDialogContext context, LuisResult result)
         {
