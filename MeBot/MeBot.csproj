@@ -47,6 +47,10 @@
       <HintPath>..\packages\Autofac.3.5.2\lib\net40\Autofac.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="BestMatchDialog, Version=1.2.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\BestMatchDialog.1.2.0\lib\net46\BestMatchDialog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Chronic, Version=0.3.2.0, Culture=neutral, PublicKeyToken=3bd1f1ef638b0d3c, processorArchitecture=MSIL">
       <HintPath>..\packages\Chronic.Signed.0.3.2\lib\net40\Chronic.dll</HintPath>
       <Private>True</Private>
@@ -160,6 +164,7 @@
   <ItemGroup>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\MessagesController.cs" />
+    <Compile Include="Dialogs\GreetingsDialog.cs" />
     <Compile Include="Dialogs\MeBotLuisDialog.cs" />
     <Compile Include="Entities\Post.cs" />
     <Compile Include="Global.asax.cs">

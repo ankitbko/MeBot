@@ -8,6 +8,8 @@ using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Luis.Models;
 using MeBot.Internal;
 using MeBot.Entities;
+using System.Threading;
+using Microsoft.Bot.Connector;
 
 namespace MeBot.Dialogs
 {
@@ -23,10 +25,10 @@ namespace MeBot.Dialogs
 
         [LuisIntent("None")]
         [LuisIntent("")]
-        public async Task None(IDialogContext context, LuisResult result)
+        public async Task None(IDialogContext context, IAwaitable<IMessageActivity> message, LuisResult result)
         {
-            await context.PostAsync("I'm sorry. I didn't understand you.");
-            context.Wait(MessageReceived);
+            var cts = new CancellationTokenSource();
+            await context.Forward(new GreetingsDialog(), GreetingDialogDone, await message, cts.Token);
         }
 
         [LuisIntent("AboutMe")]
@@ -72,6 +74,7 @@ namespace MeBot.Dialogs
             }
         }
 
+        #region Private
         private string GenerateResponseForBlogSearch(List<Post> posts, string tag)
         {
             if (string.IsNullOrWhiteSpace(tag))
@@ -88,5 +91,15 @@ namespace MeBot.Dialogs
             replyMessage += $"Have fun reading. Post a comment if you like them.";
             return replyMessage;
         }
+
+        private async Task GreetingDialogDone(IDialogContext context, IAwaitable<bool> result)
+        {
+            var success = await result;
+            if (!success)
+                await context.PostAsync("I'm sorry. I didn't understand you.");
+
+            context.Wait(MessageReceived);
+        }
+        #endregion
     }
 }
