@@ -4,3 +4,4 @@ This repo is part of series of blog post on creating a chat bot using Microsoft 
 
 https://ankitbko.github.io/2016/08/ChatBot-using-Microsoft-Bot-Framework-Part-1/
 https://ankitbko.github.io/2016/08/ChatBot-using-Microsoft-Bot-Framework-Part-2/
+https://ankitbko.github.io/2016/08/ChatBot-using-Microsoft-Bot-Framework-Part-3/
