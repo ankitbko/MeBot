@@ -6,6 +6,8 @@ using System.Web;
 using Microsoft.Bot.Builder.Luis;
 using System.Threading.Tasks;
 using Microsoft.Bot.Builder.Luis.Models;
+using MeBot.Internal;
+using MeBot.Entities;
 
 namespace MeBot.Dialogs
 {
@@ -13,6 +15,8 @@ namespace MeBot.Dialogs
     [Serializable]
     public class MeBotLuisDialog : LuisDialog<object>
     {
+        private const string BLOG_BASE_URL = "https://ankitbko.github.io";
+
         public MeBotLuisDialog(params ILuisService[] services) : base(services)
         {
         }
@@ -35,5 +39,54 @@ namespace MeBot.Dialogs
             context.Wait(MessageReceived);
         }
 
+        [LuisIntent("BlogSearch")]
+        public async Task BlogSearch(IDialogContext context, LuisResult result)
+        {
+            string tag = string.Empty;
+            string replyText = string.Empty;
+            List<Post> posts = new List<Post>();
+
+            try
+            {
+                if (result.Entities.Count > 0)
+                {
+                    tag = result.Entities.FirstOrDefault(e => e.Type == "Tag").Entity;
+                }
+
+                if (!string.IsNullOrWhiteSpace(tag))
+                {
+                    var bs = new BlogSearch();
+                    posts = bs.GetPostsWithTag(tag);
+                }
+
+                replyText = GenerateResponseForBlogSearch(posts, tag);
+                await context.PostAsync(replyText);
+            }
+            catch (Exception)
+            {
+                await context.PostAsync("Something really bad happened. You can try again later meanwhile I'll check what went wrong.");
+            }
+            finally
+            {
+                context.Wait(MessageReceived);
+            }
+        }
+
+        private string GenerateResponseForBlogSearch(List<Post> posts, string tag)
+        {
+            if (string.IsNullOrWhiteSpace(tag))
+                return "I didn't get what topic you are searching for. It might be that Ankit has not written any article so I am not able to recognize that topic. You may try to change the topic and try again.";
+            if (posts.Count == 0)
+                return "Ankit has not written any article regarding " + tag + ". Contact him on Twitter to let him know you are interested in ." + tag;
+
+            string replyMessage = string.Empty;
+            replyMessage += $"I got {posts.Count} articles on {tag} \n\n";
+            foreach (var post in posts)
+            {
+                replyMessage += $"* [{post.Name}]({BLOG_BASE_URL}{post.Url})\n\n";
+            }
+            replyMessage += $"Have fun reading. Post a comment if you like them.";
+            return replyMessage;
+        }
     }
 }
