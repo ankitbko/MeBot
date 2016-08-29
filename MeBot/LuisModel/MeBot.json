@@ -5,17 +5,34 @@
   "culture": "en-us",
   "intents": [
     {
+      "name": "BlogSearch"
+    },
+    {
+      "name": "Help"
+    },
+    {
       "name": "AboutMe"
     },
     {
       "name": "None"
     }
   ],
-  "entities": [],
+  "entities": [
+    {
+      "name": "Tag"
+    }
+  ],
   "composites": [],
   "bing_entities": [],
   "actions": [],
-  "model_features": [],
+  "model_features": [
+    {
+      "name": "PostTags",
+      "mode": true,
+      "words": "docker,luis,microsoft bot framework,chat bots,chatbot,dotnet core,identity server,identityserver,java,. net core,vsts",
+      "activated": true
+    }
+  ],
   "regex_features": [],
   "utterances": [
     {
@@ -56,6 +73,264 @@
     {
       "text": "who is the author here",
       "intent": "AboutMe",
+      "entities": []
+    },
+    {
+      "text": "show me posts related to docker",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 5,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "what are the blogs regarding luis",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 5,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "get me posts regarding bot",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "what are articles regarding microsoft bot framework",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "show me articles from microsoft bot framework",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "what are blogs about dotnet core",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 4,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "what are blogs about identity server",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 4,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "what are blogs regarding chat bot",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 4,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "what are blogs regarding core",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "what are posts on idsrv",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "what are the articles regarding",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 4,
+          "endPos": 4
+        }
+      ]
+    },
+    {
+      "text": "what are the articles regarding identity server",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 5,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "show me blogs on chat bots",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 4,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "has ankit written articles about chat bot",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 5,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "help",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "help me",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "need help",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "what can you do",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "what are your features",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "what are your capabilities",
+      "intent": "Help",
+      "entities": []
+    },
+    {
+      "text": "what articles have ankit written on chat bots",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 6,
+          "endPos": 7
+        }
+      ]
+    },
+    {
+      "text": "what are posts on .net core",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 4,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "give me brief about ankit",
+      "intent": "AboutMe",
+      "entities": []
+    },
+    {
+      "text": "good day",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "what are the blog posts on docker",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 6,
+          "endPos": 6
+        }
+      ]
+    },
+    {
+      "text": "what are posts on net core",
+      "intent": "BlogSearch",
+      "entities": [
+        {
+          "entity": "Tag",
+          "startPos": 4,
+          "endPos": 5
+        }
+      ]
+    },
+    {
+      "text": "hello",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "bye",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "great",
+      "intent": "None",
+      "entities": []
+    },
+    {
+      "text": "hi",
+      "intent": "None",
       "entities": []
     }
   ]
