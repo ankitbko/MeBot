@@ -31,6 +31,13 @@ namespace MeBot.Dialogs
             await context.Forward(new GreetingsDialog(), GreetingDialogDone, await message, cts.Token);
         }
 
+        [LuisIntent("Help")]
+        public async Task Help(IDialogContext context, LuisResult result)
+        {
+            await context.PostAsync(Responses.HelpMessage);
+            context.Wait(MessageReceived);
+        }
+
         [LuisIntent("AboutMe")]
         public async Task AboutMe(IDialogContext context, LuisResult result)
         {

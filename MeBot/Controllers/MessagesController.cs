@@ -48,13 +48,7 @@ namespace MeBot
                 // Handle conversation state changes, like members being added and removed
                 // Use Activity.MembersAdded and Activity.MembersRemoved and Activity.Action for info
                 // Not available in all channels
-                string replyMessage = string.Empty;
-                replyMessage += $"Hi there\n\n";
-                replyMessage += $"I am MeBot. Designed to answer questions about this blog.  \n";
-                replyMessage += $"Currently I have following features  \n";
-                replyMessage += $"* Ask question about the author of this blog: Try 'Who is Ankit'\n\n";
-                replyMessage += $"* Search this blog for posts on a particular topic: Try 'What are the artciles on chat bot'\n\n";
-                replyMessage += $"I will get more intelligent in future.";
+                string replyMessage = Responses.WelcomeMessage;
                 return message.CreateReply(replyMessage);
             }
             else if (message.Type == ActivityTypes.ContactRelationUpdate)
