@@ -9,14 +9,15 @@ using System.Threading.Tasks;
 
 namespace MeBot.Dialogs
 {
+    [Serializable]
     public class FeedbackForm
     {
         [Describe("Enter your name")]
-        [Prompt(new string[] { "What is your name?", "What should I call you?" })]
+        [Prompt(new string[] { "What is your name?" })]
         public string Name { get; set; }
 
-        [Describe("Enter your email or twitter handle")]
-        [Prompt("How can Ankit contact you? Enter your email id or twitter handle (@something)")]
+        [Describe("Email or Twitter handle")]
+        [Prompt("How can Ankit contact you? You can enter either your email id or twitter handle (@something)")]
         public string Contact { get; set; }
 
         [Describe("Enter your feedback")]
@@ -69,7 +70,7 @@ namespace MeBot.Dialogs
             contactInfo = string.Empty;
             if (!response.StartsWith("@"))
                 return false;
-            contactInfo = response.Remove(0, 1);
+            contactInfo = response;
             return true;
         }
     }
