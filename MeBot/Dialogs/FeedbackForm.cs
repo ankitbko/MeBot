@@ -12,15 +12,12 @@ namespace MeBot.Dialogs
     [Serializable]
     public class FeedbackForm
     {
-        [Describe("Enter your name")]
         [Prompt(new string[] { "What is your name?" })]
         public string Name { get; set; }
 
-        [Describe("Email or Twitter handle")]
         [Prompt("How can Ankit contact you? You can enter either your email id or twitter handle (@something)")]
         public string Contact { get; set; }
 
-        [Describe("Enter your feedback")]
         [Prompt("What's your feedback?")]
         public string Feedback { get; set; }
 
