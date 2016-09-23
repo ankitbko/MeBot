@@ -141,7 +141,10 @@ namespace MeBot.Dialogs
                 if (!success)
                     await context.PostAsync("I was not able to send your message. Something went wrong.");
                 else
+                {
                     await context.PostAsync("Thanks for the feedback.");
+                    await context.PostAsync("What else would you like to do?");
+                }
 
             }
             catch (FormCanceledException)
