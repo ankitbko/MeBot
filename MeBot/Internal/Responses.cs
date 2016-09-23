@@ -11,7 +11,7 @@ namespace MeBot
         public const string Features =
             "* Answer questions about the author of this blog: Try 'Who is Ankit'\n\n"
             + "* Search this blog for posts on a particular topic: Try 'What are the artciles on chat bot'\n\n"
-            + "* Send feedback to the author: Try 'I want to send a feedback'";
+            + "* Send feedback to the author: Try 'I want to send a feedback'\n\n";
 
         public const string WelcomeMessage =
             "Hi there\n\n"
