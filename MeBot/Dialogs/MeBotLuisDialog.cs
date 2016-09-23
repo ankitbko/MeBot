@@ -10,6 +10,9 @@ using MeBot.Internal;
 using MeBot.Entities;
 using System.Threading;
 using Microsoft.Bot.Connector;
+using Microsoft.Bot.Builder.FormFlow;
+using System.Text;
+using System.Configuration;
 
 namespace MeBot.Dialogs
 {
@@ -81,7 +84,27 @@ namespace MeBot.Dialogs
             }
         }
 
+        [LuisIntent("Feedback")]
+        public async Task Feedback(IDialogContext context, LuisResult result)
+        {
+            try
+            {
+                await context.PostAsync("That's great. You will need to provide few details about yourself before giving feedback.");
+                var feedbackForm = new FormDialog<FeedbackForm>(new FeedbackForm(), FeedbackForm.BuildForm, FormOptions.PromptInStart);
+                context.Call(feedbackForm, FeedbackFormComplete);
+            }
+            catch (Exception)
+            {
+                await context.PostAsync("Something really bad happened. You can try again later meanwhile I'll check what went wrong.");
+                context.Wait(MessageReceived);
+            }
+        }
+
+
         #region Private
+        private static string recipientEmail = ConfigurationManager.AppSettings["RecipientEmail"];
+        private static string senderEmail = ConfigurationManager.AppSettings["SenderEmail"];
+
         private string GenerateResponseForBlogSearch(List<Post> posts, string tag)
         {
             if (string.IsNullOrWhiteSpace(tag))
@@ -107,6 +130,43 @@ namespace MeBot.Dialogs
 
             context.Wait(MessageReceived);
         }
+
+        private async Task FeedbackFormComplete(IDialogContext context, IAwaitable<FeedbackForm> result)
+        {
+            try
+            {
+                var feedback = await result;
+                string message = GenerateEmailMessage(feedback);
+                var success = await EmailSender.SendEmail(recipientEmail, senderEmail, $"Email from {feedback.Name}", message);
+                if (!success)
+                    await context.PostAsync("I was not able to send your message. Something went wrong.");
+                else
+                    await context.PostAsync("Thanks for the feedback.");
+
+            }
+            catch (FormCanceledException)
+            {
+                await context.PostAsync("Don't want to send feedback? That's ok. You can drop a comment below.");
+            }
+            catch (Exception)
+            {
+                await context.PostAsync("Something really bad happened. You can try again later meanwhile I'll check what went wrong.");
+            }
+            finally
+            {
+                context.Wait(MessageReceived);
+            }
+        }
+
+        private string GenerateEmailMessage(FeedbackForm feedback)
+        {
+            StringBuilder sb = new StringBuilder();
+            sb.AppendLine($"Message from: {feedback.Name}");
+            sb.AppendLine($"Contact: {feedback.Contact}");
+            sb.AppendLine($"Message: {feedback.Feedback}");
+            return sb.ToString();
+        }
+
         #endregion
     }
 }
